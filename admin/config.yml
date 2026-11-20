@@ -10,8 +10,8 @@ local_backend: true
 
 locale: "ar"
 
-site_url: https://cukur.netlify.app
-display_url: https://cukur.netlify.app
+site_url: https://cukur-restaurant.netlify.app
+display_url: https://cukur-restaurant.netlify.app
 logo_url: /images/logo.jpg
 
 media_folder: "images/uploads"
