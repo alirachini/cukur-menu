@@ -1,13 +1,13 @@
 # منيو ÇUKUR
 
-Static menu site on Netlify. The menu lives in `data/menu.json` and is edited through the Arabic admin at `/admin` (Decap CMS + Netlify Identity + Git Gateway). There's no backend and no build step.
+Static menu site on Netlify. The menu lives in `data/menu.json` and is edited through a phone-first Arabic admin at `/admin` (Netlify Identity + Git Gateway). Decap CMS remains at `/admin/cms/` for desktop use. There's no backend and no build step.
 
 | Path | What it is |
 |---|---|
 | `index.html` | Public menu. Fetches `/data/menu.json` with `cache: "no-store"` plus a cache-busting query |
 | `data/menu.json` | All categories, dishes and prices, plus the phone number and tagline |
-| `admin/index.html`, `admin/config.yml` | Decap CMS admin (git-gateway, branch `main`) |
-| `admin/ar.js` | Arabic UI strings for Decap, which ships no Arabic locale |
+| `admin/index.html` | Phone admin: logs in via Netlify Identity, reads/writes `data/menu.json` and uploads images through Git Gateway |
+| `admin/cms/` | Decap CMS (desktop backup): `config.yml` + `ar.js` Arabic strings |
 | `images/uploads/` | Dish photos uploaded from the admin |
 | `netlify.toml` | Publish root, no build, no-cache for the menu, noindex for `/admin` |
 
@@ -23,8 +23,8 @@ Static menu site on Netlify. The menu lives in `data/menu.json` and is edited th
 }
 ```
 
-- Categories are shown sorted by `order` (smallest first).
-- Dishes are shown in their list order. Drag them in the admin to reorder.
+- Categories are shown sorted by `order`; the phone admin rewrites `order` from the ↑/↓ position on every save.
+- Dishes are shown in their list order.
 - `available: false` shows the dish struck through and marked «غير متوفر».
 
 ## Running it locally

@@ -1,20 +1,447 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, nofollow">
-  <title>إدارة منيو ÇUKUR</title>
-  <link rel="icon" href="/images/logo.jpg">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap">
-  <style>
-    /* Arabic font for the admin; Decap keeps its own layout */
-    body, input, textarea, button, select { font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif !important; }
-  </style>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#140d0b">
+<title>إدارة منيو ÇUKUR</title>
+<link rel="icon" href="/images/logo.jpg">
+<link rel="apple-touch-icon" href="/images/logo.jpg">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap">
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<style>
+:root{
+  --bg:#140d0b; --panel:#1f1411; --panel2:#271a16; --line:#2a1d18; --line2:#3a2a23; --wine:#5A1A12; --gold:#D4AA55; --gold-soft:#8C6A2A;
+  --text:#F4EDE4; --muted:#B9A99A; --flame:#F07A24; --danger:#E0533D; --ok:#5FB37A;
+  --f:'Cairo','Segoe UI',Tahoma,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--f);font-size:16px;line-height:1.6;min-height:100vh}
+.wrap{max-width:680px;margin:0 auto;padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px))}
+button,input,textarea{font-family:inherit;font-size:16px;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+[hidden]{display:none!important}
+
+/* inputs: 16px+ so iPhone doesn't zoom in */
+.in{width:100%;min-width:0;background:var(--bg);color:var(--text);border:1px solid var(--line2);border-radius:10px;padding:10px 12px;min-height:46px}
+.in:focus{border-color:var(--gold);outline:none}
+textarea.in{min-height:80px;resize:vertical}
+.lbl{display:block;font-size:14px;color:var(--muted);margin:0 0 4px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:46px;padding:8px 18px;border-radius:999px;border:0;background:var(--gold);color:#1a110d;font-weight:800;text-decoration:none;white-space:nowrap}
+.btn:disabled{opacity:.45;cursor:default}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--gold-soft)}
+.btn.danger{background:transparent;color:var(--danger);border:1px solid var(--danger)}
+.btn.wide{width:100%}
+.btn.sm{min-height:40px;padding:6px 14px;font-size:15px}
+.ibtn{width:44px;height:44px;flex:none;display:inline-flex;align-items:center;justify-content:center;border-radius:12px;border:1px solid var(--line2);background:var(--panel2);color:var(--text);font-size:20px;line-height:1}
+.ibtn:disabled{opacity:.35}
+.ibtn.del{color:var(--danger)}
+
+/* login */
+.login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 16px;background:radial-gradient(circle at 50% 0%,#3a140e 0%,transparent 60%)}
+.login form{width:100%;max-width:380px;display:flex;flex-direction:column;gap:14px;text-align:center}
+.login img{width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 4px;box-shadow:0 0 30px rgba(240,122,36,.35)}
+.login h1{margin:0;font-size:22px;color:var(--gold)}
+.login .field{text-align:right}
+.link{background:none;border:0;color:var(--muted);text-decoration:underline;padding:8px;font-size:15px}
+
+/* top bar */
+.bar{position:sticky;top:0;z-index:20;background:var(--panel);border-bottom:1px solid var(--gold-soft);padding-top:env(safe-area-inset-top,0px)}
+.bar .wrap{display:flex;align-items:center;gap:8px;padding-block:10px}
+.bar .t{flex:1;min-width:0;font-weight:800;color:var(--gold);font-size:18px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.status{font-size:14px;padding:8px 0;min-height:0}
+.status:empty{display:none}
+.status.ok{color:var(--ok)} .status.err{color:var(--danger)} .status.info{color:var(--muted)}
+
+main{padding-block:12px 120px}
+.hint{color:var(--muted);font-size:14px;margin:4px 0 12px}
+
+/* category */
+.cat{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden}
+.cat.open{border-color:var(--gold-soft)}
+.chead{display:flex;align-items:center;gap:10px;width:100%;padding:14px;background:none;border:0;text-align:right;min-height:58px}
+.chead .nm{flex:1;min-width:0;font-weight:800;font-size:18px;color:var(--gold);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chead .cnt{font-size:13px;color:var(--muted);flex:none}
+.chead .chev{flex:none;color:var(--muted);transition:transform .2s;font-size:14px}
+.cat.open .chev{transform:rotate(180deg)}
+.cbody{padding:0 12px 14px;display:flex;flex-direction:column;gap:12px}
+.ctools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:12px}
+.ctools .sp{flex:1}
+
+/* dish */
+.dishes{display:flex;flex-direction:column;gap:8px}
+.dish{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px}
+.dish.off .nmin{text-decoration:line-through;color:var(--muted)}
+.drow{display:flex;gap:8px;align-items:center}
+.drow .in{flex:1}
+.price-in{direction:rtl}
+.sw{flex:none;display:flex;align-items:center;gap:6px;font-size:14px;color:var(--muted);min-height:44px;padding:0 4px;cursor:pointer;user-select:none}
+.sw input{position:absolute;opacity:0;pointer-events:none}
+.sw .tr{width:44px;height:26px;border-radius:999px;background:#4a3a33;position:relative;transition:background .2s;flex:none}
+.sw .tr::after{content:"";position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .2s}
+.sw input:checked + .tr{background:var(--ok)}
+.sw input:checked + .tr::after{transform:translateX(-18px)}
+.sw input:focus-visible + .tr{outline:2px solid var(--gold);outline-offset:2px}
+.more{border-top:1px dashed var(--line2);padding-top:10px;display:flex;flex-direction:column;gap:10px}
+.imgbox{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.imgbox img{width:72px;height:72px;border-radius:10px;object-fit:cover;background:var(--bg)}
+.mtools{display:flex;gap:8px;align-items:center}
+.mtools .sp{flex:1}
+
+.add{border:1px dashed var(--gold-soft);background:transparent;color:var(--gold);border-radius:12px;min-height:48px;font-weight:700;width:100%}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:12px;margin-top:18px}
+.panel h3{margin:0;color:var(--gold);font-size:17px}
+.foot{text-align:center;margin-top:22px;display:flex;flex-direction:column;gap:6px;align-items:center}
+.foot a{color:var(--muted);font-size:14px}
+
+/* bottom save bar (shows when there are changes) */
+.savebar{position:fixed;inset:auto 0 0 0;z-index:30;background:linear-gradient(to top,var(--bg) 70%,transparent);padding:16px 0 calc(12px + env(safe-area-inset-bottom,0px));transform:translateY(110%);transition:transform .25s}
+.savebar.show{transform:none}
+.savebar .btn{width:100%;font-size:18px;min-height:54px;box-shadow:0 6px 24px rgba(0,0,0,.5)}
+.loading{padding:60px 16px;text-align:center;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
 </head>
 <body>
-  <script src="https://unpkg.com/decap-cms@3.17.3/dist/decap-cms.js"></script>
-  <script src="/admin/ar.js"></script>
+<div id="app"><div class="loading">جارٍ التحميل…</div></div>
+
+<script>
+(function(){
+'use strict';
+var FILE='data/menu.json', BRANCH='main', UPLOADS='images/uploads';
+var GIT='/.netlify/git/github/contents/', ID='/.netlify/identity';
+var KEY='cukur.admin.session';
+var app=document.getElementById('app');
+
+var session=null, data=null, sha=null, dirty=false, saving=false;
+var openCats={}, openDish={}, previews={}, pendingImages={}, uid=0;
+var statusMsg='', statusKind='info';
+
+/* ---------- helpers ---------- */
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function b64ToText(b){var bin=atob(b.replace(/\s/g,''));var u=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return new TextDecoder().decode(u);}
+function bytesToB64(u){var s='';for(var i=0;i<u.length;i+=0x8000)s+=String.fromCharCode.apply(null,u.subarray(i,i+0x8000));return btoa(s);}
+function textToB64(t){return bytesToB64(new TextEncoder().encode(t));}
+function dishWord(n){return n===0?'لا أصناف':n===1?'صنف واحد':n===2?'صنفان':n<=10?n+' أصناف':n<100?n+' صنفاً':n+' صنف';}
+
+function setStatus(msg,kind){statusMsg=msg||'';statusKind=kind||'info';var el=document.getElementById('status');if(el){el.textContent=statusMsg;el.className='status '+statusKind;}}
+function markDirty(){if(!dirty){dirty=true;}var sb=document.getElementById('savebar');if(sb)sb.classList.add('show');var b=document.getElementById('saveTop');if(b)b.disabled=false;if(statusKind==='ok')setStatus('');}
+window.addEventListener('beforeunload',function(e){if(dirty){e.preventDefault();e.returnValue='';}});
+
+/* ---------- auth (Netlify Identity / GoTrue) ---------- */
+function loadSession(){try{session=JSON.parse(localStorage.getItem(KEY))||null;}catch(e){session=null;}}
+function saveSession(s){session=s;try{s?localStorage.setItem(KEY,JSON.stringify(s)):localStorage.removeItem(KEY);}catch(e){}}
+function tokenReq(body){
+  return fetch(ID+'/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body})
+    .then(function(r){return r.json().then(function(j){if(!r.ok)throw j;return j;});})
+    .then(function(j){var s={access:j.access_token,refresh:j.refresh_token,exp:Date.now()+(j.expires_in||3600)*1000,email:(session&&session.email)||''};return s;});
+}
+function login(email,pw){
+  return tokenReq('grant_type=password&username='+encodeURIComponent(email)+'&password='+encodeURIComponent(pw))
+    .then(function(s){s.email=email;saveSession(s);return s;});
+}
+function token(){
+  if(!session)return Promise.reject({auth:true});
+  if(Date.now()<session.exp-60000)return Promise.resolve(session.access);
+  return tokenReq('grant_type=refresh_token&refresh_token='+encodeURIComponent(session.refresh))
+    .then(function(s){s.email=session.email;saveSession(s);return s.access;})
+    .catch(function(){saveSession(null);throw {auth:true};});
+}
+function api(path,opts){
+  opts=opts||{};
+  return token().then(function(t){
+    var h={'Authorization':'Bearer '+t};if(opts.body)h['Content-Type']='application/json';
+    return fetch(GIT+path,{method:opts.method||'GET',headers:h,body:opts.body?JSON.stringify(opts.body):undefined,cache:'no-store'});
+  }).then(function(r){
+    if(r.status===401){saveSession(null);throw {auth:true};}
+    return r.json().catch(function(){return {};}).then(function(j){if(!r.ok){j.status=r.status;throw j;}return j;});
+  });
+}
+function logout(){
+  if(dirty&&!confirm('في تعديلات لم تُحفظ. هل تريد الخروج بدون حفظ؟'))return;
+  dirty=false;saveSession(null);data=null;renderLogin();
+}
+
+/* ---------- data ---------- */
+function prep(d){
+  d.settings=d.settings||{phone:'',tagline:''};
+  d.categories=(d.categories||[]).slice().sort(function(a,b){return (Number(a.order)||0)-(Number(b.order)||0);});
+  d.categories.forEach(function(c){c._id=++uid;c.dishes=(c.dishes||[]).map(function(x){x._id=++uid;if(x.available===undefined)x.available=true;return x;});});
+  return d;
+}
+function clean(d){
+  return {
+    settings:{phone:String(d.settings.phone||'').trim(),tagline:String(d.settings.tagline||'').trim()},
+    categories:d.categories.map(function(c,i){
+      return {name:String(c.name||'').trim(),order:i+1,note:String(c.note||'').trim(),
+        dishes:c.dishes.filter(function(x){return String(x.name||'').trim();}).map(function(x){
+          return {name:String(x.name).trim(),price:String(x.price||'').trim(),description:String(x.description||'').trim(),image:x.image||'',available:x.available!==false};
+        })};
+    })
+  };
+}
+function loadMenu(){
+  app.innerHTML='<div class="loading">جارٍ تحميل المنيو…</div>';
+  return api(FILE+'?ref='+BRANCH+'&t='+Date.now()).then(function(j){
+    sha=j.sha;data=prep(JSON.parse(b64ToText(j.content)));dirty=false;renderEditor();
+  }).catch(function(e){
+    if(e&&e.auth){renderLogin('انتهت الجلسة، الرجاء تسجيل الدخول من جديد.');return;}
+    app.innerHTML='<div class="loading">تعذّر تحميل المنيو.<br><br><button class="btn" id="retry" type="button">إعادة المحاولة</button></div>';
+    document.getElementById('retry').onclick=loadMenu;
+  });
+}
+function find(cid,did){
+  var c=null,ci=-1;data.categories.forEach(function(x,i){if(x._id===cid){c=x;ci=i;}});
+  if(did==null)return {c:c,ci:ci};
+  var d=null,di=-1;if(c)c.dishes.forEach(function(x,i){if(x._id===did){d=x;di=i;}});
+  return {c:c,ci:ci,d:d,di:di};
+}
+
+/* ---------- save ---------- */
+function save(){
+  if(saving)return;
+  var bad=data.categories.filter(function(c){return !String(c.name||'').trim();});
+  if(bad.length){setStatus('في قسم بدون اسم. اكتب اسم القسم أو احذفه قبل الحفظ.','err');openCats[bad[0]._id]=true;renderEditor();return;}
+  saving=true;updateSaving();setStatus('جارٍ الحفظ…','info');
+  var imgs=Object.keys(pendingImages);
+  var chain=Promise.resolve();
+  imgs.forEach(function(path){
+    chain=chain.then(function(){
+      return api(path,{method:'PUT',body:{message:'رفع صورة: '+path.split('/').pop(),content:pendingImages[path],branch:BRANCH}})
+        .then(function(){delete pendingImages[path];});
+    });
+  });
+  chain.then(function(){
+    var json=JSON.stringify(clean(data),null,2)+'\n';
+    return api(FILE,{method:'PUT',body:{message:'تحديث المنيو',content:textToB64(json),sha:sha,branch:BRANCH}});
+  }).then(function(j){
+    sha=j.content&&j.content.sha;dirty=false;saving=false;
+    setStatus('تم الحفظ ✓ — سيظهر التعديل على المنيو خلال دقيقة تقريباً.','ok');renderEditor();
+  }).catch(function(e){
+    saving=false;updateSaving();
+    if(e&&e.auth){setStatus('انتهت الجلسة. سجّل الدخول من جديد ثم اضغط حفظ (تعديلاتك ما زالت هنا).','err');showRelogin();return;}
+    if(e&&(e.status===409||e.status===422)){setStatus('تم تعديل المنيو من جهاز آخر. حدّث الصفحة ثم أعد التعديل.','err');return;}
+    setStatus('تعذّر الحفظ. تأكد من الإنترنت وحاول مرة أخرى.','err');
+  });
+}
+function updateSaving(){
+  ['saveTop','saveBottom'].forEach(function(id){var b=document.getElementById(id);if(b){b.disabled=saving||(!dirty&&id==='saveTop');b.textContent=saving?'جارٍ الحفظ…':(id==='saveTop'?'حفظ':'حفظ ونشر التعديلات');}});
+}
+function showRelogin(){
+  var email=session&&session.email||'';
+  var pw=prompt('اكتب كلمة السر لتسجيل الدخول من جديد'+(email?' ('+email+')':''));
+  if(!pw||!email)return;
+  login(email,pw).then(function(){setStatus('تم تسجيل الدخول. اضغط حفظ.','info');}).catch(function(){setStatus('كلمة السر غير صحيحة.','err');});
+}
+
+/* ---------- images ---------- */
+function pickImage(cid,did){
+  var inp=document.createElement('input');inp.type='file';inp.accept='image/*';
+  inp.onchange=function(){
+    var f=inp.files&&inp.files[0];if(!f)return;
+    setStatus('جارٍ تجهيز الصورة…','info');
+    resize(f,900).then(function(dataUrl){
+      var name=Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,6)+'.jpg';
+      var path=UPLOADS+'/'+name;
+      pendingImages[path]=dataUrl.split(',')[1];
+      var r=find(cid,did);r.d.image='/'+path;previews['/'+path]=dataUrl;
+      markDirty();setStatus('');renderEditor();
+    }).catch(function(){setStatus('تعذّر قراءة الصورة. جرّب صورة أخرى.','err');});
+  };
+  inp.click();
+}
+function resize(file,max){
+  return new Promise(function(res,rej){
+    var url=URL.createObjectURL(file),img=new Image();
+    img.onload=function(){
+      var s=Math.min(1,max/Math.max(img.width,img.height)),w=Math.round(img.width*s),h=Math.round(img.height*s);
+      var cv=document.createElement('canvas');cv.width=w;cv.height=h;cv.getContext('2d').drawImage(img,0,0,w,h);
+      URL.revokeObjectURL(url);res(cv.toDataURL('image/jpeg',0.82));
+    };
+    img.onerror=function(){URL.revokeObjectURL(url);rej();};
+    img.src=url;
+  });
+}
+
+/* ---------- views ---------- */
+function renderLogin(msg){
+  app.innerHTML='<div class="login"><form id="lf" novalidate>'+
+    '<img src="/images/logo.jpg" alt="ÇUKUR">'+
+    '<h1>إدارة المنيو</h1>'+
+    '<div class="field"><label class="lbl" for="em">البريد الإلكتروني</label><input class="in" id="em" type="email" inputmode="email" autocomplete="username" dir="ltr" required></div>'+
+    '<div class="field"><label class="lbl" for="pw">كلمة السر</label><input class="in" id="pw" type="password" autocomplete="current-password" dir="ltr" required></div>'+
+    '<div class="status err" id="lm">'+esc(msg||'')+'</div>'+
+    '<button class="btn wide" type="submit" id="lb">دخول</button>'+
+    '<button class="link" type="button" id="forgot">نسيت كلمة السر؟</button>'+
+    '<a class="link" href="/">← الرجوع إلى المنيو</a>'+
+  '</form></div>';
+  var em=document.getElementById('em'),pw=document.getElementById('pw'),lm=document.getElementById('lm'),lb=document.getElementById('lb');
+  try{em.value=localStorage.getItem(KEY+'.email')||'';}catch(e){}
+  (em.value?pw:em).focus();
+  document.getElementById('lf').onsubmit=function(e){
+    e.preventDefault();
+    if(!em.value.trim()||!pw.value){lm.className='status err';lm.textContent='اكتب البريد الإلكتروني وكلمة السر.';return;}
+    lb.disabled=true;lb.textContent='جارٍ الدخول…';lm.textContent='';
+    login(em.value.trim(),pw.value).then(function(){
+      try{localStorage.setItem(KEY+'.email',em.value.trim());}catch(e){}
+      loadMenu();
+    }).catch(function(){
+      lb.disabled=false;lb.textContent='دخول';lm.className='status err';lm.textContent='البريد الإلكتروني أو كلمة السر غير صحيحة.';
+    });
+  };
+  document.getElementById('forgot').onclick=function(){
+    var mail=em.value.trim();
+    if(!mail){lm.className='status err';lm.textContent='اكتب بريدك الإلكتروني أولاً ثم اضغط «نسيت كلمة السر».';em.focus();return;}
+    fetch(ID+'/recover',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:mail})})
+      .then(function(){lm.className='status ok';lm.textContent='أرسلنا رابطاً إلى بريدك لتعيين كلمة سر جديدة.';})
+      .catch(function(){lm.className='status err';lm.textContent='تعذّر الإرسال، حاول مرة أخرى.';});
+  };
+}
+
+function dishHTML(c,x,i,n){
+  var open=!!openDish[x._id], img=x.image?(previews[x.image]||x.image):'';
+  var h='<div class="dish'+(x.available===false?' off':'')+'" data-c="'+c._id+'" data-d="'+x._id+'">'+
+    '<div class="drow"><input class="in nmin" data-f="name" value="'+esc(x.name)+'" placeholder="اسم الصنف" aria-label="اسم الصنف"></div>'+
+    '<div class="drow">'+
+      '<input class="in price-in" data-f="price" value="'+esc(x.price)+'" placeholder="السعر" aria-label="السعر">'+
+      '<label class="sw"><input type="checkbox" data-f="available"'+(x.available!==false?' checked':'')+'><span class="tr"></span><span>متوفر</span></label>'+
+      '<button class="ibtn" type="button" data-a="more" aria-expanded="'+open+'" aria-label="خيارات أكثر">'+(open?'▴':'⋯')+'</button>'+
+    '</div>';
+  if(open){
+    h+='<div class="more">'+
+      '<div><label class="lbl">الوصف (اختياري)</label><textarea class="in" data-f="description" rows="2" placeholder="مثلاً: مع بطاطا وكولسلو">'+esc(x.description)+'</textarea></div>'+
+      '<div><label class="lbl">الصورة (اختياري)</label><div class="imgbox">'+
+        (img?'<img src="'+esc(img)+'" alt="">':'')+
+        '<button class="btn sm ghost" type="button" data-a="img">'+(img?'تغيير الصورة':'إضافة صورة')+'</button>'+
+        (img?'<button class="btn sm danger" type="button" data-a="noimg">إزالة</button>':'')+
+      '</div></div>'+
+      '<div class="mtools">'+
+        '<button class="ibtn" type="button" data-a="dup" aria-label="تحريك للأعلى"'+(i===0?' disabled':'')+'>↑</button>'+
+        '<button class="ibtn" type="button" data-a="ddown" aria-label="تحريك للأسفل"'+(i===n-1?' disabled':'')+'>↓</button>'+
+        '<span class="sp"></span>'+
+        '<button class="btn sm danger" type="button" data-a="ddel">حذف الصنف</button>'+
+      '</div></div>';
+  }
+  return h+'</div>';
+}
+
+function catHTML(c,i,n){
+  var open=!!openCats[c._id];
+  var h='<div class="cat'+(open?' open':'')+'" data-c="'+c._id+'">'+
+    '<button class="chead" type="button" data-a="toggle" aria-expanded="'+open+'">'+
+      '<span class="nm">'+esc(c.name||'قسم بدون اسم')+'</span><span class="cnt">'+dishWord(c.dishes.length)+'</span><span class="chev">▼</span>'+
+    '</button>';
+  if(open){
+    h+='<div class="cbody">'+
+      '<div><label class="lbl">اسم القسم</label><input class="in" data-f="cname" value="'+esc(c.name)+'"></div>'+
+      '<div><label class="lbl">ملاحظة تحت اسم القسم (اختياري)</label><input class="in" data-f="cnote" value="'+esc(c.note)+'" placeholder="مثلاً: يُطلب مسبقاً"></div>'+
+      '<div class="dishes">';
+    c.dishes.forEach(function(x,j){h+=dishHTML(c,x,j,c.dishes.length);});
+    h+='</div><button class="add" type="button" data-a="dadd">＋ إضافة صنف</button>'+
+      '<div class="ctools">'+
+        '<button class="ibtn" type="button" data-a="cup" aria-label="تحريك القسم للأعلى"'+(i===0?' disabled':'')+'>↑</button>'+
+        '<button class="ibtn" type="button" data-a="cdown" aria-label="تحريك القسم للأسفل"'+(i===n-1?' disabled':'')+'>↓</button>'+
+        '<span class="sp"></span>'+
+        '<button class="btn sm danger" type="button" data-a="cdel">حذف القسم</button>'+
+      '</div></div>';
+  }
+  return h+'</div>';
+}
+
+function renderEditor(){
+  var sy=window.scrollY, h='';
+  h+='<div class="bar"><div class="wrap">'+
+       '<span class="t">تعديل المنيو</span>'+
+       '<a class="btn sm ghost" href="/" target="_blank" rel="noopener">عرض المنيو</a>'+
+       '<button class="btn sm" type="button" id="saveTop" data-a="save"'+(dirty&&!saving?'':' disabled')+'>حفظ</button>'+
+     '</div><div class="wrap"><div class="status '+statusKind+'" id="status" role="status">'+esc(statusMsg)+'</div></div></div>';
+  h+='<main class="wrap">';
+  h+='<p class="hint">اضغط على أي قسم لفتحه وتعديل أصنافه. اكتب السعر كما تريد أن يظهر للزبون (مثلاً: 450.000 ل.ل). بعد الانتهاء اضغط «حفظ».</p>';
+  data.categories.forEach(function(c,i){h+=catHTML(c,i,data.categories.length);});
+  h+='<button class="add" type="button" data-a="cadd">＋ إضافة قسم جديد</button>';
+  h+='<div class="panel"><h3>معلومات المطعم</h3>'+
+     '<div><label class="lbl" for="sp">رقم الواتساب</label><input class="in" id="sp" data-f="phone" inputmode="tel" dir="ltr" value="'+esc(data.settings.phone)+'"></div>'+
+     '<div><label class="lbl" for="st">الجملة تحت الشعار</label><input class="in" id="st" data-f="tagline" value="'+esc(data.settings.tagline)+'"></div></div>';
+  h+='<div class="foot"><button class="link" type="button" data-a="logout">تسجيل الخروج'+(session&&session.email?' ('+esc(session.email)+')':'')+'</button>'+
+     '<a href="/admin/cms/">المحرّر المتقدّم (للكمبيوتر)</a></div>';
+  h+='</main>';
+  h+='<div class="savebar'+(dirty?' show':'')+'" id="savebar"><div class="wrap"><button class="btn" type="button" id="saveBottom" data-a="save">حفظ ونشر التعديلات</button></div></div>';
+  app.innerHTML=h;
+  window.scrollTo(0,sy);
+  updateSaving();
+}
+
+/* ---------- events ---------- */
+app.addEventListener('input',function(e){
+  var t=e.target,f=t.dataset&&t.dataset.f;if(!f||!data)return;
+  if(f==='phone'){data.settings.phone=t.value;return markDirty();}
+  if(f==='tagline'){data.settings.tagline=t.value;return markDirty();}
+  var cel=t.closest('[data-c]'),del=t.closest('[data-d]');
+  var r=find(+cel.dataset.c,del?+del.dataset.d:null);
+  if(f==='cname'){r.c.name=t.value;var nm=cel.querySelector('.chead .nm');if(nm)nm.textContent=t.value||'قسم بدون اسم';}
+  else if(f==='cnote')r.c.note=t.value;
+  else if(f==='available'){r.d.available=t.checked;del.classList.toggle('off',!t.checked);}
+  else if(r.d)r.d[f]=t.value;
+  markDirty();
+});
+app.addEventListener('change',function(e){var t=e.target;if(t.dataset&&t.dataset.f==='available'){t.dispatchEvent(new Event('input',{bubbles:true}));}});
+
+app.addEventListener('click',function(e){
+  var b=e.target.closest('[data-a]');if(!b||!data)return;
+  var a=b.dataset.a;
+  if(a==='save')return save();
+  if(a==='logout')return logout();
+  if(a==='cadd'){
+    var nc={_id:++uid,name:'',order:0,note:'',dishes:[{_id:++uid,name:'',price:'',description:'',image:'',available:true}]};
+    data.categories.push(nc);openCats[nc._id]=true;markDirty();renderEditor();
+    var ci=document.querySelector('.cat[data-c="'+nc._id+'"] [data-f="cname"]');if(ci){ci.scrollIntoView({block:'center'});ci.focus();}
+    return;
+  }
+  var cel=b.closest('[data-c]');if(!cel)return;
+  var del=b.closest('[data-d]'),r=find(+cel.dataset.c,del?+del.dataset.d:null),cats=data.categories,tmp;
+  switch(a){
+    case 'toggle':openCats[r.c._id]=!openCats[r.c._id];renderEditor();return;
+    case 'cup':if(r.ci>0){tmp=cats[r.ci-1];cats[r.ci-1]=r.c;cats[r.ci]=tmp;}break;
+    case 'cdown':if(r.ci<cats.length-1){tmp=cats[r.ci+1];cats[r.ci+1]=r.c;cats[r.ci]=tmp;}break;
+    case 'cdel':
+      if(!confirm('حذف قسم «'+(r.c.name||'بدون اسم')+'» وكل أصنافه ('+r.c.dishes.length+')؟'))return;
+      cats.splice(r.ci,1);break;
+    case 'dadd':
+      var nd={_id:++uid,name:'',price:'',description:'',image:'',available:true};
+      r.c.dishes.push(nd);markDirty();renderEditor();
+      var ni=document.querySelector('.dish[data-d="'+nd._id+'"] [data-f="name"]');if(ni){ni.scrollIntoView({block:'center'});ni.focus();}
+      return;
+    case 'more':openDish[r.d._id]=!openDish[r.d._id];renderEditor();return;
+    case 'dup':if(r.di>0){tmp=r.c.dishes[r.di-1];r.c.dishes[r.di-1]=r.d;r.c.dishes[r.di]=tmp;}break;
+    case 'ddown':if(r.di<r.c.dishes.length-1){tmp=r.c.dishes[r.di+1];r.c.dishes[r.di+1]=r.d;r.c.dishes[r.di]=tmp;}break;
+    case 'ddel':
+      if(!confirm('حذف «'+(r.d.name||'الصنف')+'»؟'))return;
+      r.c.dishes.splice(r.di,1);break;
+    case 'img':return pickImage(r.c._id,r.d._id);
+    case 'noimg':r.d.image='';break;
+    default:return;
+  }
+  markDirty();renderEditor();
+});
+
+/* ---------- start ---------- */
+/* Invite / password-reset links: let the Netlify widget handle them, then come back here. */
+if(/(invite_token|recovery_token|confirmation_token|email_change_token)=/.test(location.hash)&&window.netlifyIdentity){
+  netlifyIdentity.on('login',function(u){
+    saveSession({access:u.token.access_token,refresh:u.token.refresh_token,exp:u.token.expires_at||Date.now()+3600000,email:u.email});
+    netlifyIdentity.close();history.replaceState(null,'',location.pathname);loadMenu();
+  });
+  app.innerHTML='<div class="loading">أكمل الخطوات في النافذة…</div>';
+}else{
+  loadSession();
+  if(session)loadMenu();else renderLogin();
+}
+})();
+</script>
 </body>
 </html>
