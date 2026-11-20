@@ -1,0 +1,22 @@
+# Static site: no build step, publish the repo root.
+[build]
+  publish = "."
+  command = ""
+
+# Menu data must never be cached, so phones always see current prices.
+[[headers]]
+  for = "/data/menu.json"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+# Keep the admin out of search engines.
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-cache"

@@ -1,0 +1,764 @@
+{
+  "settings": {
+    "phone": "71472510",
+    "tagline": "من الشرق للغرب… كلو عالنار 🔥"
+  },
+  "categories": [
+    {
+      "name": "اللحوم",
+      "order": 1,
+      "note": "",
+      "dishes": [
+        {
+          "name": "فروج غاز",
+          "price": "1.000.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "فروج غاز + رز",
+          "price": "1.000.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "صحن رز ",
+          "price": "500.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "الساندويشات",
+      "order": 2,
+      "note": "",
+      "dishes": [
+        {
+          "name": "شاورما كبير",
+          "price": "350.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "شاورما دوبل",
+          "price": "450.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "شاورما شوكور",
+          "price": "500.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "شاورما تركي",
+          "price": "550.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "فرنسيسكو",
+          "price": "450.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "تشكن ساب",
+          "price": "500.000  ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "فاهيتا",
+          "price": "500.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "كريسبي",
+          "price": "450.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "طاووق",
+          "price": "350.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "اسكالوب",
+          "price": "450.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "بطاطا",
+          "price": "200.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "كساديا",
+          "price": "600.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "بطاطا بفرنجي",
+          "price": "300.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "الوجبات",
+      "order": 3,
+      "note": "",
+      "dishes": [
+        {
+          "name": "وجبة كريسبي",
+          "price": "750.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "وجبة فاهيتا",
+          "price": "850.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "وجبة فرنسيسكو",
+          "price": "850.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "وجبة شاورما شوكور",
+          "price": "850.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "وجبة شاورما صاج عربية",
+          "price": "850.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "وجبة اسكالوب",
+          "price": "750.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "وجبة ناغتس",
+          "price": "750.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "وجبة بروستد جوانح",
+          "price": "750.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "وجبة أوفر لود كريسبي كبير",
+          "price": "550.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "وجبة أوفر لود كريسبي صغير",
+          "price": "450.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "وجبة أوفر لود طاووق كبير",
+          "price": "550.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "وجبة أوفر لود طاووق صغير",
+          "price": "450.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "وجبة أوفر لود شاورما كبير",
+          "price": "550.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "وجبة أوفر لود شاورما صغير",
+          "price": "450.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "ريزو كريسبي كبير",
+          "price": "550.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "ريزو كريسبي صغير",
+          "price": "450.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "ريزو طاووق كبير",
+          "price": "550.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "ريزو طاووق صغير",
+          "price": "450.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "ريزو شاورما كبير",
+          "price": "550.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "ريزو شاورما صغير",
+          "price": "450.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "المناسف",
+      "order": 4,
+      "note": "للطلب قبل بوقت • نلبّي المناسبات",
+      "dishes": [
+        {
+          "name": "رز مندي ملوّن مدخّن + قلوبات ",
+          "price": "1.100.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "رز كبسة بخضار مدخّن + قلوبات",
+          "price": "1.100.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "رز كبسة سادة مدخّن + قلوبات ",
+          "price": "1.100.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "رز بلحمة مفرومة + قلوبات ",
+          "price": "1.200.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "منسف فروج غاز",
+          "price": "1.500.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "منسف فروج فحم",
+          "price": "1.700.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "منسف رز + كيلو طاووق",
+          "price": "1.400.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "منسف رز + كيلو كباب",
+          "price": "3.000.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "منسف رز ولحمة + فروج + قلوبات",
+          "price": "2.500.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "منسف رز و لحمة + لحمة كراديش ",
+          "price": "حسب نوع اللحمة و الكمية ",
+          "description": "",
+          "image": "",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "مشاوي",
+      "order": 5,
+      "note": "للطلب قبل الوقت و نلبي جميع المناسبات ",
+      "dishes": [
+        {
+          "name": "طاووق",
+          "price": "1.700.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "كباب",
+          "price": "2.250.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "كفتة",
+          "price": "2.250.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "شقف غنم",
+          "price": "3.000.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "مشاوي مشكّل",
+          "price": "3.000.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "جوانح مدخّنة",
+          "price": "900.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "فروج عالفحم ",
+          "price": "1.100.000",
+          "description": "",
+          "image": "",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "برغر",
+      "order": 6,
+      "note": "",
+      "dishes": [
+        {
+          "name": "ليبانيز برغر",
+          "price": "350.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "تشيز برغر",
+          "price": "400.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "تشكن برغر",
+          "price": "450.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "تشكن تشيز برغر",
+          "price": "500.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "اسكالوب برغر",
+          "price": "450.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "السلطات",
+      "order": 7,
+      "note": "",
+      "dishes": [
+        {
+          "name": "سلطة",
+          "price": "350.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "فتوش",
+          "price": "400.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "تبولة",
+          "price": "400.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "سلطة ملفوف",
+          "price": "400.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "سيزر سالاد",
+          "price": "600.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "بطاطا Frozen",
+      "order": 8,
+      "note": "",
+      "dishes": [
+        {
+          "name": "علبة كبيرة",
+          "price": "500.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "علبة صغيرة",
+          "price": "400.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "شاورما بالوزن",
+      "order": 9,
+      "note": "",
+      "dishes": [
+        {
+          "name": "نص كيلو شاورما",
+          "price": "1.000.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "كيلو شاورما",
+          "price": "2.000.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "المشروبات",
+      "order": 10,
+      "note": "",
+      "dishes": [
+        {
+          "name": "بيبسي كبير",
+          "price": "170.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "ميرندا كبير",
+          "price": "170.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "سفن آب كبير",
+          "price": "170.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "بيبسي وسط",
+          "price": "150.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "بيبسي دايت وسط",
+          "price": "150.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "ميرندا وسط",
+          "price": "150.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "سفن آب وسط",
+          "price": "150.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "بيبسي صغير",
+          "price": "70.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "ميرندا صغير",
+          "price": "70.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "سفن آب صغير",
+          "price": "70.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "بيبسي تنك",
+          "price": "80.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "بيبسي تنك دايت",
+          "price": "80.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "ميرندا تنك",
+          "price": "80.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "سفن آب تنك",
+          "price": "80.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "سفن آب تنك دايت",
+          "price": "80.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "مياه كبير",
+          "price": "100.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "مياه صغير",
+          "price": "50.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "لبن عيران صغير",
+          "price": "70.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "مشروب طاقة",
+          "price": "70.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        }
+      ]
+    },
+    {
+      "name": "إضافات",
+      "order": 11,
+      "note": "",
+      "dishes": [
+        {
+          "name": "علبة توم ",
+          "price": "50.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "علبة توم وسط",
+          "price": "300.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "علبة توم كبيرة",
+          "price": "600.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "علبة حمص ",
+          "price": "100.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "علبة حمص وسط",
+          "price": "300.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "علبة حمص ككبير",
+          "price": "600.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "علبة صوص أفوكا ",
+          "price": "100.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "علبة مايونيز ",
+          "price": "100.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "علبة كبيس ",
+          "price": "50.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "علبة كبيس وسط",
+          "price": "150.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        },
+        {
+          "name": "علبة كبيس كبير",
+          "price": "300.000 ل.ل",
+          "description": "",
+          "image": "",
+          "available": true
+        }
+      ]
+    }
+  ]
+}

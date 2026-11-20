@@ -1,0 +1,72 @@
+# Decap CMS config — لوحة تحكم منيو ÇUKUR
+backend:
+  name: git-gateway
+  branch: main
+  commit_messages:
+    update: "تحديث المنيو: {{slug}}"
+
+# Lets you test the admin on your computer with `npx decap-server` (ignored on the live site)
+local_backend: true
+
+locale: "ar"
+
+site_url: https://cukur.netlify.app
+display_url: https://cukur.netlify.app
+logo_url: /images/logo.jpg
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "menu"
+    label: "المنيو"
+    description: "عدّل الأقسام والأصناف والأسعار. بعد الحفظ والنشر، التعديل بيبيّن عالموقع خلال دقيقة تقريباً."
+    editor:
+      preview: false
+    files:
+      - name: "menu"
+        label: "منيو المطعم"
+        file: "data/menu.json"
+        format: "json"
+        fields:
+          - name: "settings"
+            label: "معلومات المطعم"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { name: "phone", label: "رقم الواتساب", widget: "string" }
+              - { name: "tagline", label: "الجملة تحت اللوغو", widget: "string", required: false }
+
+          - name: "categories"
+            label: "الأقسام"
+            label_singular: "قسم"
+            widget: "list"
+            collapsed: true
+            summary: "{{fields.order}} • {{fields.name}}"
+            add_to_top: false
+            fields:
+              - { name: "name", label: "اسم القسم", widget: "string" }
+              - name: "order"
+                label: "الترتيب"
+                hint: "رقم أصغر = القسم بيطلع أوّل بالمنيو (1، 2، 3…)"
+                widget: "number"
+                value_type: "int"
+                default: 99
+              - { name: "note", label: "ملاحظة تحت اسم القسم", widget: "string", required: false }
+              - name: "dishes"
+                label: "الأصناف"
+                label_singular: "صنف"
+                widget: "list"
+                collapsed: true
+                summary: "{{fields.name}} — {{fields.price}}"
+                hint: "اسحب الصنف لفوق أو لتحت لتغيّر ترتيبه"
+                fields:
+                  - { name: "name", label: "اسم الصنف", widget: "string" }
+                  - name: "price"
+                    label: "السعر"
+                    hint: "اكتبه متل ما بدك يبيّن للزبون، مثلاً 450.000 ل.ل"
+                    widget: "string"
+                    required: false
+                  - { name: "description", label: "الوصف", widget: "text", required: false }
+                  - { name: "image", label: "الصورة", widget: "image", required: false, choose_url: false }
+                  - { name: "available", label: "متوفر", widget: "boolean", default: true, required: false }

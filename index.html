@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>منيو ÇUKUR</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Rubik:wght@800&display=swap">
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<style>
+/* Layout: one narrow column like a printed menu card; sticky category bar; dotted price leaders */
+:root{
+  --bg:#140d0b; --panel:#1f1411; --line:#2a1d18; --wine:#5A1A12; --gold:#D4AA55; --gold-soft:#8C6A2A;
+  --text:#F4EDE4; --muted:#B9A99A; --flame:#F07A24; --danger:#E0533D; --ok:#5FB37A;
+  --f-body:'Cairo','Segoe UI',Tahoma,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:680px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{padding-block:24px 16px;background:radial-gradient(circle at 50% 0%,#3a140e 0%,transparent 70%)}
+header .wrap{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+header img.logo{width:220px;height:220px;max-width:70vw;max-height:70vw;border-radius:50%;object-fit:cover;box-shadow:0 0 40px rgba(240,122,36,.35)}
+.tag{color:var(--muted);font-size:15px}
+.info{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:6px}
+.chip{border:1px solid var(--gold-soft);border-radius:999px;padding:4px 14px;font-size:14px;color:var(--text);text-decoration:none}
+.chip b{color:var(--gold);font-variant-numeric:tabular-nums;direction:ltr;display:inline-block}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:6px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+nav a{flex:none;color:var(--muted);text-decoration:none;padding:6px 14px;border-radius:999px;font-weight:600;font-size:15px}
+nav a.on,nav a:hover{background:var(--wine);color:var(--gold)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+main{padding-block:6px 30px}
+section{padding-top:22px;scroll-margin-top:64px}
+h2{font-size:23px;font-weight:800;color:var(--gold);margin:0;display:flex;align-items:center;gap:10px}
+h2::after{content:"";flex:1;height:1px;background:linear-gradient(to left,transparent,var(--gold-soft))}
+.cnote{color:var(--flame);font-size:14px;font-weight:600;margin-top:2px}
+.item{display:flex;align-items:baseline;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+.item .name{flex:1;min-width:0;font-weight:700;font-size:17px}
+.item.off .name{color:var(--muted);text-decoration:line-through}
+.item .soldout{font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:0 6px}
+.price{color:var(--gold);font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+/* optional extras (only shown when a dish has a description or image) */
+.item.has-img{align-items:center}
+.item .thumb{width:56px;height:56px;border-radius:10px;object-fit:cover;flex:none}
+.item .desc{display:block;font-weight:400;font-size:14px;color:var(--muted);line-height:1.5}
+.order{margin-top:30px;background:var(--panel);border:1px solid var(--gold-soft);border-radius:14px;padding:20px;text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center}
+.order .num{font-size:30px;font-weight:800;color:var(--gold);direction:ltr;letter-spacing:2px}
+.btn{font-family:inherit;background:var(--gold);color:#1a110d;font-weight:800;text-decoration:none;padding:10px 24px;border-radius:999px;font-size:16px;border:0;cursor:pointer}
+footer{padding-block:10px 30px;text-align:center}
+.adminlink{background:none;border:0;color:#5e4c42;font-family:inherit;font-size:13px;cursor:pointer;padding:6px;text-decoration:none}
+.status{padding:60px 16px;text-align:center;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+</head>
+<body>
+<div id="root" dir="rtl" lang="ar"><div class="status">جاري تحميل المنيو…</div></div>
+
+<script>
+(function(){
+var LOGO='<img class="logo" src="/images/logo.jpg" alt="لوغو ÇUKUR" width="220" height="220">';
+var root=document.getElementById('root');
+
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function waNum(p){var d=String(p||'').replace(/\D/g,'');if(d.charAt(0)==='0')d=d.slice(1);return '961'+d;}
+function fmtPhone(p){var d=String(p||'').replace(/\D/g,'');return d.length===8?d.slice(0,2)+' '+d.slice(2,5)+' '+d.slice(5):p;}
+
+/* Categories sorted by "order" (ties keep their list position). Dishes keep list order. */
+function sortedCats(data){
+  return (data.categories||[]).map(function(c,i){return {c:c,i:i};})
+    .sort(function(a,b){
+      var oa=Number(a.c.order), ob=Number(b.c.order);
+      oa=isFinite(oa)?oa:1e9; ob=isFinite(ob)?ob:1e9;
+      return oa-ob||a.i-b.i;
+    }).map(function(x){return x.c;});
+}
+
+function render(data){
+  var st=data.settings||{}, phone=st.phone||'', cats=sortedCats(data), h='';
+  h+='<header><div class="wrap">'+LOGO+'<div class="tag">'+esc(st.tagline)+'</div><div class="info">'+
+     '<a class="chip" href="https://wa.me/'+waNum(phone)+'" target="_blank" rel="noopener">واتساب <b>'+esc(fmtPhone(phone))+'</b></a>'+
+     '<span class="chip">🛵 ديليفري</span></div></div></header>';
+  h+='<nav aria-label="أقسام المنيو"><div class="wrap" id="tabs">';
+  cats.forEach(function(c,i){h+='<a href="#c'+i+'"'+(i===0?' class="on"':'')+'>'+esc(c.name)+'</a>';});
+  h+='</div></nav><main class="wrap">';
+  cats.forEach(function(c,i){
+    h+='<section id="c'+i+'"><h2>'+esc(c.name)+'</h2>'+(c.note?'<div class="cnote">'+esc(c.note)+'</div>':'');
+    (c.dishes||[]).forEach(function(d){
+      var off=d.available===false;
+      h+='<div class="item'+(off?' off':'')+(d.image?' has-img':'')+'">'+
+         (d.image?'<img class="thumb" src="'+esc(d.image)+'" alt="" loading="lazy">':'')+
+         '<span class="name">'+esc(d.name)+(d.description?'<span class="desc">'+esc(d.description)+'</span>':'')+'</span>'+
+         (off?'<span class="soldout">غير متوفر</span>':(d.price?'<span class="price">'+esc(d.price)+'</span>':''))+'</div>';
+    });
+    h+='</section>';
+  });
+  h+='<div class="order"><div>للطلب والديليفري</div><div class="num">'+esc(fmtPhone(phone))+'</div>'+
+     '<a class="btn" href="https://wa.me/'+waNum(phone)+'" target="_blank" rel="noopener">اطلب عالواتساب</a></div></main>';
+  h+='<footer><a class="adminlink" href="/admin/">إدارة</a></footer>';
+  root.innerHTML=h;
+  if(location.hash){var t=document.getElementById(location.hash.slice(1));if(t)t.scrollIntoView();}
+  spy();
+}
+
+function spy(){
+  var links=[].slice.call(document.querySelectorAll('#tabs a')); if(!links.length)return;
+  var y=window.scrollY+90,cur=0;
+  links.forEach(function(a,i){var s=document.getElementById('c'+i);if(s&&s.offsetTop<=y)cur=i;});
+  links.forEach(function(a,i){a.classList.toggle('on',i===cur);});
+  var on=links[cur],bar=on.parentNode; bar.scrollLeft=on.offsetLeft-bar.clientWidth/2+on.clientWidth/2;
+}
+window.addEventListener('scroll',spy,{passive:true});
+
+function load(){
+  fetch('/data/menu.json?v='+Date.now(),{cache:'no-store'})
+    .then(function(r){if(!r.ok)throw new Error(r.status);return r.json();})
+    .then(render)
+    .catch(function(){
+      root.innerHTML='<div class="status">ما قدرنا نحمّل المنيو. <button class="btn" type="button" id="retry">جرّب مرة تانية</button></div>';
+      document.getElementById('retry').onclick=load;
+    });
+}
+load();
+
+/* Netlify Identity: invite / password-recovery links land on "/", send the user on to the admin. */
+if(window.netlifyIdentity){
+  netlifyIdentity.on('init',function(user){
+    if(!user){netlifyIdentity.on('login',function(){document.location.href='/admin/';});}
+  });
+}
+})();
+</script>
+</body>
+</html>
